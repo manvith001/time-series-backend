@@ -21,7 +21,8 @@ Built with **FastAPI**, powered by **Prophet**, and designed to serve forecasts 
 - **Version Control:** GitHub
 
 ---
-ime-series-backend/
+```
+time-series-backend/
 ├── api/ # FastAPI app & API routes
 │ ├── main.py # Main entrypoint for FastAPI
 │ ├── train.py # Training endpoint logic
@@ -43,8 +44,7 @@ ime-series-backend/
 ├── Dockerfile # Docker build instructions
 ├── README.md # Backend documentation
 └── venv/ # Virtual environment (not included in repo)
-## How to Run 
-
+```
 
 ### **1. Run Locally**
 ```bash
