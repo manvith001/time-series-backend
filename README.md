@@ -21,28 +21,28 @@ Built with **FastAPI**, powered by **Prophet**, and designed to serve forecasts 
 - **Version Control:** GitHub
 
 ---
-##time-series-backend/
-├── api/                     # FastAPI app & API routes
-│   ├── main.py               # Main entrypoint for FastAPI
-│   
+ime-series-backend/
+├── api/ # FastAPI app & API routes
+│ ├── main.py # Main entrypoint for FastAPI
+│ ├── train.py # Training endpoint logic
+│ ├── predict.py # Prediction endpoint logic
+│ └── utils.py # Helper functions
 │
-├── model/                   # Model artifacts & scripts
-│   ├── train_and_evaluate.py # Train + evaluate Prophet model
-│   ├── preprocess.py         # Data preprocessing & feature engineering
-│   ├── saved_model.pkl       # Trained model file (Joblib)
-│   └── model_metrics/        # Folder for metrics
-│       └── metrics.json      # MAE, RMSE values
+├── model/ # Model artifacts & scripts
+│ ├── train_and_evaluate.py # Train + evaluate Prophet model
+│ ├── preprocess.py # Data preprocessing & feature engineering
+│ ├── saved_model.pkl # Trained model file (Joblib)
+│ └── model_metrics/ # Folder for metrics
+│ └── metrics.json # MAE, RMSE values
 │
-├── data/                    # Dataset files
-│   ├── PJME_hourly.csv       # Main dataset
-│   └── raw/                  # Optional raw datasets
+├── data/ # Dataset files
+│ ├── PJME_hourly.csv # Main dataset
+│ └── raw/ # Optional raw datasets
 │
-├── requirements.txt         # Python dependencies
-├── Dockerfile               # Docker build instructions
-├── README.md                # Backend documentation
-└── venv/                    # Virtual environment (not in repo)
-
-
+├── requirements.txt # Python dependencies
+├── Dockerfile # Docker build instructions
+├── README.md # Backend documentation
+└── venv/ # Virtual environment (not included in repo)
 ## How to Run 
 
 
