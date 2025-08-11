@@ -1,0 +1,17 @@
+venv/
+Backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model 
+*.pkl
+
+
+
+# Editor configs
+.vscode/
+.idea/
