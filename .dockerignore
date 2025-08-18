@@ -13,7 +13,7 @@ logs/
 *.log
 
 # Data & models (large files should not go in image)
-data/
+
 model/*.pkl
 model/model_metrics/
 
