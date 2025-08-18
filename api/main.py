@@ -10,7 +10,7 @@ from fastapi.encoders import jsonable_encoder
 from model.train_and_evaluate import train_and_save
 import pandas as pd
 from model.preprocess import preprocess_data
-
+import logging
 app = FastAPI()
 
 
@@ -25,6 +25,17 @@ app.add_middleware(
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "data", "PJME_hourly.csv")
 MODEL_PATH = os.path.join(BASE_DIR, "model", "prophet_model.pkl")
+LOG_DIR = os.path.join(os.path.dirname(__file__), "../logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(os.path.join(LOG_DIR, "app.log")),
+        logging.StreamHandler()
+    ]
+)
 
 
 
@@ -37,6 +48,7 @@ model = joblib.load(MODEL_PATH) if os.path.exists(MODEL_PATH) else None
 
 @app.post("/train")
 async def train_model():
+    logging.info("API /train called")
     if not os.path.exists(DATA_PATH):
         return JSONResponse(
             status_code=404, content={"message": "Data file not found."}
@@ -56,8 +68,10 @@ async def train_model():
 
 @app.post("/predict")
 def predict_endpoint(periods: int = Query(24, description="Number of hours to forecast")):
+    logging.info("API /predict called with periods=%s", periods)
     
-    
+    if periods <= 0:
+        return JSONResponse(status_code=400, content={"error": "Periods must be a positive integer"})
     global model
     if model is None:
             if not os.path.exists(MODEL_PATH):

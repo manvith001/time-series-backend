@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+
+# Logs
+logs/
+*.log
+
+# Data & models (large files should not go in image)
+data/
+model/*.pkl
+model/model_metrics/
+
+
+# Git
+.git
+.gitignore
+
+# OS
+.DS_Store
