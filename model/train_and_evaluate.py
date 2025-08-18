@@ -15,8 +15,8 @@ os.makedirs(METRIC_DIR, exist_ok=True)
 METRIC_PATH = os.path.join(METRIC_DIR, "metrics.json")
 
 def train_and_save():
-    # Skip retraining if model exists and retrain not forced
-    if os.path.exists(MODEL_PATH) and not force_retrain:
+    
+    if os.path.exists(MODEL_PATH) :
         print("[INFO] Model already exists. Skipping retraining.")
         return joblib.load(MODEL_PATH)
 
