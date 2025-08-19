@@ -39,7 +39,7 @@ time-series-backend/
 ├── data/ # Dataset files
 │ ├── PJME_hourly.csv # Main dataset
 │ └── raw/ # Optional raw datasets
-│
+│____logs  #for checking the logs 
 ├── requirements.txt # Python dependencies
 ├── Dockerfile # Docker build instructions
 ├── README.md # Backend documentation
@@ -69,11 +69,12 @@ Backend URL: http://127.0.0.1:8000
 
 ### **2. Run with Docker**
 ```
-Docker hub link :https://hub.docker.com/r/manvithbhoomi/time_series_model_backend
+Docker hub link :https://hub.docker.com/r/manvithbhoomi/time_series_backend
 
 # Pull Docker image
-docker pull manvithbhoomi/time_series_model_backend
+docker pull manvithbhoomi/time_series_backend:latest
+
 
 Run the container:
-docker run -d -p 8000:8000 manvithbhoomi/time_series_model_backend
+docker run -d -p 80:80 manvithbhoomi/time_series_backend:latest
 ```
