@@ -31,7 +31,13 @@ def train_and_save():
     baseline_mae, baseline_rmse = evaluate(test_df["y"], test_df["baseline_prev_hour"], "Baseline Model")
 
     # Prophet model
-    model = Prophet()
+    model = Prophet(
+        daily_seasonality=True,
+        yearly_seasonality=True,
+        changepoint_prior_scale=0.05,
+        seasonality_mode="multiplicative"
+    )
+
     
     model.add_regressor("lag1")
     model.add_regressor("lag2")
