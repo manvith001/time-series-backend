@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 from prophet import Prophet
-from statsmodels.tsa.statespace.sarimax import SARIMAX
 from xgboost import XGBRegressor
 from catboost import CatBoostRegressor
 from model.preprocess import preprocess_data
