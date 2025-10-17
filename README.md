@@ -135,5 +135,3 @@ Each trained model saves metrics as JSON:
  Add asynchronous training with background workers
 
  Integrate Redis caching for fast re-forecasts
-
- Enable Prometheus metrics & Grafana dashboards
