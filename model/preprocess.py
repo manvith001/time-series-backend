@@ -17,10 +17,12 @@ def preprocess_data(path):
    
     df["lag1"] = df["y"].shift(1)
     df["lag2"] = df["y"].shift(24)
+    df["lag24"] = df["y"].shift(24)
 
    
 
     df["rolling_mean_24"] = df["y"].rolling(window=24).mean()
+    df["rolling_std_24"] = df["y"].rolling(24).std()
 
     
 
