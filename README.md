@@ -1,24 +1,36 @@
 # Time Series Forecasting Backend (FastAPI + Prophet)
 
-Backend service for the **Time Series Forecasting WebApp**.  
-Built with **FastAPI**, powered by **Prophet**, and designed to serve forecasts via REST APIs.
+Backend service powering the Time Series Forecasting WebApp, built using FastAPI and enhanced with multiple time series and machine learning models — including Prophet, XGBoost, and CatBoost.
 
+This backend provides APIs to upload data, train models, version them automatically, and generate future forecasts.
 ---
 
 ##  Features
-- Train forecasting model on **hourly energy consumption** dataset
-- Predict for **next N hours/days**
-- Saves & loads model using **Joblib**
-- Returns **MAE** & **RMSE** metrics
-- Docker-ready, deployed on **AWS ECS**
 
+
+**Multi-Model Support** – Train and forecast using Prophet, XGBoost, or CatBoost  
+**CSV Upload API** – Upload your own dataset for on-demand training  
+**Automated Model Versioning** – Auto-saves model versions (`model_v1.pkl`, `model_v2.pkl`, …)  
+**Centralized Exception Handling** – Unified error responses through utilities  
+**Logging System** – Tracks all events and errors in `logs/app.log`  
+**Metrics Storage** – Tracks MAE, RMSE, and R² for every model version  
+**Docker Support** – Build and run anywhere seamlessly  
+**Modular Architecture** – Clean separation of routes, logic, and storage  
 ---
 
-## 🛠 Tech Stack
-- **Language:** Python 3.11
-- **Libraries:** Prophet, Pandas, Joblib, FastAPI, Uvicorn
-- **Deployment:** AWS ECS, Docker
-- **Version Control:** GitHub
+
+
+## Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| **Language** | Python 3.11 |
+| **Framework** | FastAPI |
+| **Forecasting Models** | Prophet, XGBoost, CatBoost |
+| **Storage** | File-based (CSV, PKL, JSON) |
+| **Deployment** | Docker, AWS ECS |
+| **Logging** | Python logging with rotation |
+| **Version Control** | GitHub |
 
 ---
 ```
@@ -78,3 +90,50 @@ docker pull manvithbhoomi/time_series_backend:latest
 Run the container:
 docker run -d -p 80:80 manvithbhoomi/time_series_backend:latest
 ```
+ Example Flow
+1️ Upload a Dataset
+POST /upload_csv
+{
+  "message": "File uploaded successfully",
+  "file_name": "9c143a011ab74698a8126dbb50927fc1_PJME_hourly.csv"
+}
+
+2️ Train a Model
+POST /train?model_name=prophet&file_name=9c143a011ab74698a8126dbb50927fc1_PJME_hourly.csv
+{
+  "message": "prophet model trained successfully",
+  "version": 2,
+  "metrics": { "mae": 12.34, "rmse": 18.91, "r2": 0.92 }
+}
+
+3️ Generate Forecast
+POST /predict?model_name=prophet&version=2&periods=48
+{
+  "message": "Prediction successful for next 48 periods",
+  "Data": [
+    { "ds": "2024-01-01 00:00:00", "yhat": 1234.5 },
+    ...
+  ]
+}
+
+
+📊 Metrics Example
+
+Each trained model saves metrics as JSON:
+
+{
+  "mae": 12.34,
+  "rmse": 18.91,
+  "r2": 0.92,
+  "timestamp": "2025-10-18T12:32:00"
+}
+
+ Future Improvements
+
+ Add LSTM / NeuralProphet deep learning model
+
+ Add asynchronous training with background workers
+
+ Integrate Redis caching for fast re-forecasts
+
+ Enable Prometheus metrics & Grafana dashboards
